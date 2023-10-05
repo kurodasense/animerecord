@@ -1,4 +1,4 @@
-# animterecord
+# animerecord
 
 ## Project setup
 ```
