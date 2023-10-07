@@ -1,0 +1,88 @@
+/*@import "~normalize.css";!*引用css*!*/
+/*:root: 伪类*/
+/*:root -> 获取根元素html*/
+:root {
+  --color-text: #000;
+  --color-high-text: #ff5777;
+  --color-tint: #ff8198;
+  --color-background: #f5f7f8;
+  --primary-white: #fff;
+  --primary-border-radius: 10px;
+  --font-size: 16px;
+  --font-weight: 700;
+  --application-bg-color: white;
+  --line-height: 1.5;
+  --footer-font-color: #1296db;
+  --label-bg-color: #1296db;
+  --label-font-color: white;
+  --label-font-size: 12px;
+  --label-line-height: 18px;
+  --score-font-size: 22px;
+  --score-font-color: #1296db;
+  --score-line-height: 30px;
+  --description-font-color: #868c92;
+  --description-font-size: 14px;
+  --description-line-height: 22px;
+  --title-font-color: #1d2127;
+  --title-font-size: 18px;
+  --title-line-height: 26px;
+  --application-shadow-color: #868c92;
+  --hot-label-font-color: #868c92;
+  --hot-label-font-size: 12px;
+  --hot-label-line-height: 18px;
+  --hot-label-bg-color: #f5f7f8;
+  --nonactive-color: #868c92;
+  --active-color: #1296db;
+}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
+  "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  user-select: none; /* 禁止用户鼠标在页面上选中文字/图片等 */
+  -webkit-tap-highlight-color: transparent; /* webkit是苹果浏览器引擎，tap点击，highlight背景高亮，color颜色，颜色用数值调节 */
+  background: var(--color-background);
+  color: var(--color-text);
+  scroll-behavior: smooth;
+  height: 100%;
+}
+a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.clear-fix::after {
+  clear: both;
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  visibility: hidden;
+}
+
+.clear-fix {
+  zoom: 1;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+img{
+  opacity: 1;
+  transition: opacity .3s ease-in-out;
+}
+input{
+  color: inherit;
+  font: inherit;
+  outline: none;
+}

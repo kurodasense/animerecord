@@ -1,19 +1,20 @@
 <template>
-  <div id="nav-content">
-    <h1>NavContent</h1>
+  <div id="home">
+    <h1> Home </h1>
   </div>
 </template>
 
 <script>
   export default{
-    name: 'NavContent',
-    
+    name: 'Home',
+
   }
+
 
 </script>
 
-<style scopoed>
-  #nav-content{
+<style scoped>
+  #home{
     border: 2px black solid;
   }
 </style>

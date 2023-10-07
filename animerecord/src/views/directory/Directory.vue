@@ -1,19 +1,20 @@
 <template>
-  <div id="nav-content">
-    <h1>NavContent</h1>
+  <div id="directory">
+    <h1> Directory </h1>
   </div>
 </template>
 
 <script>
   export default{
-    name: 'NavContent',
-    
+    name: 'Directory',
+
   }
+
 
 </script>
 
-<style scopoed>
-  #nav-content{
+<style scoped>
+  #directory{
     border: 2px black solid;
   }
 </style>
