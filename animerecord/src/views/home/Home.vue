@@ -1,13 +1,14 @@
 <template>
   <div id="home">
-    <h1> Home </h1>
+    <CardItem v-for="i in 7" />
   </div>
 </template>
 
 <script>
+import CardItem from '@/components/Rightcontent/CardItem'
   export default{
     name: 'Home',
-
+    components: {CardItem}
   }
 
 
@@ -15,6 +16,9 @@
 
 <style scoped>
   #home{
-    border: 2px black solid;
+    width: 100%;
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
   }
 </style>

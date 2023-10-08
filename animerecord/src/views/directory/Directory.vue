@@ -1,6 +1,6 @@
 <template>
   <div id="directory">
-    <h1> Directory </h1>
+    Directory
   </div>
 </template>
 
@@ -15,6 +15,5 @@
 
 <style scoped>
   #directory{
-    border: 2px black solid;
   }
 </style>

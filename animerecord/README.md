@@ -19,8 +19,11 @@ npm run build
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## TODO
-* 左侧导航栏
-* 右侧主要内容展示
+* 左侧导航栏 ✔
+* 右侧主要内容展示:
+  * card-item
 
 ### Predecided framework
 ![Alt text](framework.png)
+
+vue3+element plus

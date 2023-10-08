@@ -1,6 +1,6 @@
 <template>
   <div id="nav-content">
-    <h1>NavContent</h1>
+    <slot></slot>
   </div>
 </template>
 
@@ -14,6 +14,11 @@
 
 <style scopoed>
   #nav-content{
-    border: 2px black solid;
+    width: auto;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 0 7px 10px 5px rgba(134,140,146,.3);
   }
 </style>
