@@ -26,7 +26,6 @@ export default {
   flex: 1;
   margin: 0 auto;
   align-items: flex-start;
-  height: 100%;
 }
 
 .left-nav {
@@ -39,7 +38,6 @@ export default {
 .right-content {
   width: 100%;
   height: 100%;
-  border: 2px black solid;
   margin: 0 25px 0 50px;
 }
 </style>
