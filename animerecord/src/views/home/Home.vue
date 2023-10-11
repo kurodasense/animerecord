@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Data from "@/data/data.json"
+// import Data from "@/data/data.json"
 import CardItem from '@/components/Rightcontent/CardItem'
 import {getAnimeDate} from "@/network/api";
   export default{

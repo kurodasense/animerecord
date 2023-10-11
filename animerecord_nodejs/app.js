@@ -10,6 +10,7 @@ app.use(cors());
 
 // 注册router
 app.use(express.urlencoded({extended: false}));
+// 使post请求可以用req.body接受参数
 app.use(express.json());
 app.use('/api', router);
 

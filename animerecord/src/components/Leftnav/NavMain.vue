@@ -12,10 +12,13 @@
         <template #item-icon>
           <Management />
         </template>
-        <template #item-text>
-          <div>归档</div>
-        </template>
       </NavItem>
+      <!-- 添加追番日期 -->
+      <NavButton name="添加追番日期" activeColor="#2a5caa">
+        <template #item-icon>
+          <Ticket />
+        </template>
+      </NavButton>
     </NavContent>
   </div>
 </template>
@@ -23,9 +26,10 @@
 <script>
 import NavContent from "@/components/Leftnav/NavContent"
 import NavItem from "@/components/Leftnav/NavItem"
+import NavButton from "@/components/Leftnav/NavButton"
 export default {
   name: 'NavMain',
-  components: { NavContent, NavItem },
+  components: { NavContent, NavItem, NavButton },
 }
 
 </script>

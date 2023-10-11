@@ -14,3 +14,19 @@ export async function getAnimeRecordByDateId(date_id){
     params: {date_id}
   });
 }
+
+export async function updateNewAnimeRecord(record_id, date_id, anime_name, watch_status){
+  return await request({
+    url: '/api/updateNewAnimeRecord',
+    method: 'post',
+    data: {record_id, date_id, anime_name, watch_status}
+  });
+}
+
+export async function addNewAnimeDate(date_name){
+  return await request({
+    url: 'api/addNewAnimeDate',
+    method: 'post',
+    data: {date_name}
+  });
+}

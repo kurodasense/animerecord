@@ -15,7 +15,6 @@
 <style scopoed>
   #nav-content{
     width: auto;
-    height: 200px;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
