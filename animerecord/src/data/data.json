@@ -6,7 +6,7 @@
     ]
   },
   {
-    "date": "2018.1",
+    "date": "2018.10",
     "anime_record": [
       {"anime_name": "SSSS.GRIDMAN", "watch_status": "待看"}
     ]
@@ -15,6 +15,28 @@
     "date": "2022.4",
     "anime_record": [
       {"anime_name": "乙女游戏世界对路人角色很不友好", "watch_status": "待看"}
+    ]
+  },
+  {
+    "date": "2023.7",
+    "anime_record": [
+      {"anime_name": "身为悲剧始作俑者的最强邪恶BOSS女王为民竭心尽力", "watch_status": "看完"},
+      {"anime_name": "转生成自动贩卖机的我今天也在迷宫徘徊", "watch_status": "待看"},
+      {"anime_name": "白圣女与黑牧师", "watch_status": "看完"},
+      {"anime_name": "我的幸福婚约", "watch_status": "看完"},
+      {"anime_name": "幻日的夜羽", "watch_status": "在看"},
+      {"anime_name": "妖幻三重奏", "watch_status": "看完"},
+      {"anime_name": "LV1魔王与独居废勇者", "watch_status": "看完"},
+      {"anime_name": "奇异贤伴 黑色天使", "watch_status": "待看"},
+      {"anime_name": "无职转生：到了异世界就拿出真本事～第二季", "watch_status": "看完"},
+      {"anime_name": "七魔剑支配天下", "watch_status": "待看"},
+      {"anime_name": "吹响悠风号 合奏比赛篇", "watch_status": "待看"},
+      {"anime_name": "其实，我乃最强？", "watch_status": "看完"},
+      {"anime_name": "虽然等级只有1级但固有技能是最强的", "watch_status": "看完"},
+      {"anime_name": "莱莎的炼金工房 ～常暗女王与秘密藏身处～ ", "watch_status": "待看"},
+      {"anime_name": "黑暗集会", "watch_status": "待看"},
+      {"anime_name": "间谍教室第二季", "watch_status": "待看"},
+      {"anime_name": "圣者无双～上班族的异世界生存之道～", "watch_status": "待看"}
     ]
   }
 ]

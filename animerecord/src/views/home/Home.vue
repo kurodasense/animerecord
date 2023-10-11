@@ -1,28 +1,38 @@
 <template>
   <div id="home">
-    <CardItem v-for="i in 7" />
+    <CardItem v-for="date in anime_date" :date="date" />
   </div>
 </template>
 
 <script>
+import Data from "@/data/data.json"
 import CardItem from '@/components/Rightcontent/CardItem'
+import {getAnimeDate} from "@/network/api";
   export default{
     name: 'Home',
     components: {CardItem},
     data(){
       return {
-        anime_record: []
+        anime_date: [] 
       }
     },
     created(){
-      // this.getAnimeRecord();
+      // 获取所有的追番日期
+      this.getData();
     },
     methods: {
-      getAnimeRecord(){
-        const data = fs.readFileSync('data.json','utf8');	//读取json文件
-        let temp = JSON.parse(data)	//将数据解析为json对象
-        console.log(temp);
-      }
+      getData(){
+        getAnimeDate().then(res =>{
+          let {status, msg, data} = res.data;
+          if(status === 200){
+            this.anime_date = data;
+          }else{
+            this.$message.error(msg);
+          }
+        }).catch(err =>{
+          this.$message.error(err);
+        });
+      },
     }
   }
 

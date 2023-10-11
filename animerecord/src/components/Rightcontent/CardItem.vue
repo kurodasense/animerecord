@@ -2,13 +2,14 @@
   <el-card class="box-card">
     <template #header>
       <div class="card-header">
-        <span>{{record_date}}</span>
+        <span>{{date.date_name}}</span>
         <el-button class="button" text @click="addRecord">添加</el-button>
       </div>
     </template>
     <el-scrollbar height="300px">
-      <el-table 
-        :data="tableData" 
+      <el-empty v-if="record[0] == null" description="暂无记录捏" />
+      <el-table v-else 
+        :data="record" 
         border 
         style="width: 100%" 
         :show-header="false" 
@@ -23,7 +24,7 @@
                 type="textarea" 
                 autosize
                 ref="elinput"
-                @blur="inputBlur(scope)"/>
+                @blur="inputBlur(scope.row)"/>
             </span>
             <span v-else>{{ scope.row.anime_name }}</span>
           </template>
@@ -34,7 +35,7 @@
               <el-input 
               v-model="scope.row.watch_status"
               ref="elinput"
-              @blur="inputBlur(scope)"/>
+              @blur="inputBlur(scope.row)"/>
             </span>
             <span v-else>{{ scope.row.watch_status }}</span>
           </template>
@@ -45,22 +46,35 @@
 </template>
 
 <script>
+import {getAnimeRecordByDateId} from "@/network/api";
 export default {
   name: 'CardItem',
+  props: {
+    date: {}
+  },
   data() {
     return {
-      record_date: '2023.10',
-      tableData: [
-        { anime_name: "因想当冒险者而前往大都市的女儿已经升到了S级", watch_status: "在看" },
-        { anime_name: "葬送的芙莉莲", watch_status: "待看" },
-        { anime_name: "我推是反派大小姐", watch_status: "在看" },
-        { anime_name: "SHY 腼腆英雄", watch_status: "看完" },
-      ],
+      record: [],
       tabClickIndex: null, // 当前点击的单元格
       tabClickLabel: '', // 当前点击的列名
     }
   },
+  created(){
+
+  },
   methods: {
+    getData(){
+      getAnimeRecordByDateId(this.date.date_id).then(res =>{
+        let {status, msg, data} = res.data;
+        if(status === 200){
+          this.record = data;
+        }else{
+          this.$message.error(msg);
+        }
+      }).catch(err =>{
+        this.$message.error(err);
+      });
+    },
     cellStyle({ row, column, rowIndex, columnIndex }) {
       switch (row.watch_status) {
         case "在看":
@@ -81,14 +95,14 @@ export default {
         this.$refs.elinput.focus();
       });
     },
-    inputBlur(scope){
+    inputBlur(row){
       this.tabClickIndex = null;
       this.tabClickLabel = '';
       // todo: 保存数据
       
     },
     addRecord(){
-      this.tableData.push({anime_name: '/', watch_status: '/'});
+      this.record.push({anime_name: 'new anime', watch_status: '待看'});
     },
   }
 }
