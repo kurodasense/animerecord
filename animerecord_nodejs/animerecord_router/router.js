@@ -68,12 +68,11 @@ router.get('/getAnimeRecordByDateId', (req, res) => {
 // 如果追番记录存在则更新，否则插入
 router.post('/updateNewAnimeRecord', (req, res) => {
   let { record_id, date_id, anime_name, watch_status } = req.body;
-  console.log(record_id, date_id, anime_name, watch_status);
-  // let sql = `if not exists (select * from anime_record where date_id = ${date_id}, anime_name='${anime_name}, watch_status='${watch_status}')
-  //             insert into anime_record(date_id, anime_name, watch_status) values(${date_id}, '${anime_name}', '${watch_status}'
-  //             else
-  //             update anime_record set date_id=${date_id}, anime_name='${anime_name}', watch_status='${watch_status}' where record_id=${record_id}`;
-  let sql = `replace into anime_record(record_id, date_id, anime_name, watch_status) values(${record_id}, ${date_id}, '${anime_name}', '${watch_status}')`;
+  let sql = `insert into anime_record(record_id, date_id, anime_name, watch_status)
+              values('${record_id}', '${date_id}', '${anime_name}', '${watch_status}')
+              on duplicate key update
+              anime_name='${anime_name}'`;
+  // let sql = `replace into anime_record(record_id, date_id, anime_name) values('${record_id}', '${date_id}', '${anime_name}');`;
   db.query(sql, (err, results) => {
     if (err) {
       res.send({
@@ -91,18 +90,40 @@ router.post('/updateNewAnimeRecord', (req, res) => {
   });
 });
 
-router.post('/addNewAnimeDate', (req, res) =>{
-  let {date_name} = req.body;
+// 修改追番记录的观看状态 
+router.post('/updateNewAnimeWatchStatus', (req, res) => {
+  let { record_id, date_id, anime_name, watch_status } = req.body;
+  let sql = `update anime_record set watch_status='${watch_status}' 
+              where record_id='${record_id}' and date_id='${date_id}' and anime_name='${anime_name}'`;
+  db.query(sql, (err, results) => {
+    if (err) {
+      res.send({
+        status: 400,
+        msg: '修改追番记录的观看状态失败',
+        data: err.message
+      });
+    } else {
+      res.send({
+        status: 200,
+        msg: 'success',
+        data: results
+      })
+    }
+  });
+});
+
+router.post('/addNewAnimeDate', (req, res) => {
+  let { date_name } = req.body;
   let date_id = new Date().Format("yyyyMMddHHmmss");
   let sql = `insert into anime_date(date_id, date_name) values ('${date_id}', '${date_name}')`;
-  db.query(sql, (err, results) =>{
-    if(err){
+  db.query(sql, (err, results) => {
+    if (err) {
       res.send({
         status: 400,
         msg: '新增追番日期失败',
         data: err.message
       });
-    }else{
+    } else {
       res.send({
         status: 200,
         msg: 'success',
@@ -111,5 +132,28 @@ router.post('/addNewAnimeDate', (req, res) =>{
     }
   });
 });
+
+router.post('/deleteAnimeRecord', (req, res) => {
+  let { date_id } = req.body;
+  let sql_delete_in_anime_date = `delete from anime_date where date_id='${date_id}';`;
+  let sql_delete_in_anime_record = `delete from anime_record where date_id='${date_id}';`;
+  db.query(sql_delete_in_anime_date + sql_delete_in_anime_record, (err, results) => {
+    if (err) {
+      res.send({
+        status: 400,
+        msg: '删除追番记录表失败',
+        data: err.message
+      });
+    } else {
+      res.send({
+        status: 200,
+        msg: 'success',
+        data: results
+      });
+    }
+  });
+});
+
+
 
 module.exports = router;

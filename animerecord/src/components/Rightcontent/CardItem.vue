@@ -3,7 +3,18 @@
     <template #header>
       <div class="card-header">
         <span>{{ date.date_name }}</span>
-        <el-button class="button" text @click="addRecord">添加</el-button>
+        <div style="text-align: right;">
+          <el-popover placement="top" trigger="click">
+            <template #reference>
+              <el-button class="button" type="danger" text>删除记录表</el-button>
+            </template>
+            <el-text tag="p" type="danger">确认删除?</el-text>
+            <div style="text-align: right; margin-top: 10px">
+              <el-button size="small" type="primary" @click="delRecord">确认</el-button>
+            </div>
+          </el-popover>
+          <el-button class="button" text @click="addRecord">添加追番</el-button>
+        </div>
       </div>
     </template>
     <el-scrollbar height="300px">
@@ -14,7 +25,7 @@
           <template #default="scope">
             <span v-if="scope.row.index === tabClickIndex && tabClickLabel === 'anime_name'">
               <el-input v-model="scope.row.anime_name" autosize ref="elinput" @blur="inputBlur"
-                @change="inputChange(scope.row)" />
+                @change="updateAnimeName(scope.row)" />
             </span>
             <span v-else>{{ scope.row.anime_name }}</span>
           </template>
@@ -23,7 +34,7 @@
           <template #default="scope">
             <span v-if="scope.row.index === tabClickIndex && tabClickLabel === 'watch_status'">
               <el-input v-model="scope.row.watch_status" ref="elinput" @blur="inputBlur"
-                @change="inputChange(scope.row)" />
+                @change="updateWatchStatus(scope.row)" />
             </span>
             <span v-else>{{ scope.row.watch_status }}</span>
           </template>
@@ -34,9 +45,11 @@
 </template>
 
 <script>
-import { getAnimeRecordByDateId, updateNewAnimeRecord } from "@/network/api";
+import { getAnimeRecordByDateId, updateNewAnimeRecord, deleteAnimeRecord, updateNewAnimeWatchStatus } from "@/network/api";
+import { ElStep } from "element-plus";
 export default {
   name: 'CardItem',
+  inject: ['reload'],
   props: {
     date: {}
   },
@@ -81,10 +94,10 @@ export default {
     },
     cellStyle({ row, column, rowIndex, columnIndex }) {
       switch (row.watch_status) {
-        case "在看":
+        case "待看":
           if (columnIndex === 1) return { "background": "yellow" };
         case "看完":
-          if (columnIndex === 1) return { "background": "red" };
+          if (columnIndex === 1) return { "background": "red", "color": "white" };
         default:
           if (columnIndex === 1) return { "background": "" };
       }
@@ -103,29 +116,59 @@ export default {
       this.tabClickIndex = null;
       this.tabClickLabel = '';
     },
-    inputChange(row) {
+    updateAnimeName(row) {
       this.tabClickIndex = null;
       this.tabClickLabel = '';
       // todo: 保存数据
       let record_id = row.record_id;
-      if(record_id == null){
+      if (record_id == null) {
         record_id = new Date().Format("yyyyMMddHHmmss");
       }
       updateNewAnimeRecord(record_id, this.date.date_id, row.anime_name, row.watch_status).then(res => {
         let { status, msg, data } = res.data;
         if (status === 200) {
           // todo
+          row.record_id = record_id;
         } else {
           this.$message.error(msg);
         }
       }).catch(err => {
         this.$message.error(msg);
       });
-
+    },
+    updateWatchStatus(row) {
+      this.tabClickIndex = null;
+      this.tabClickLabel = '';
+      let { record_id, anime_name, watch_status } = row;
+      updateNewAnimeWatchStatus(record_id, this.date.date_id, anime_name, watch_status).then(res => {
+        let { status, msg, data } = res.data;
+        if (status === 200) {
+          // todo
+        } else {
+          this.$message.error(err);
+        }
+      }).catch(err => {
+        this.$message.error(err);
+      });
     },
     addRecord() {
       this.record.push({ anime_name: 'new anime', watch_status: '待看' });
     },
+    delRecord() {
+      deleteAnimeRecord(this.date.date_id).then(res => {
+        let { status, msg, data } = res.data;
+        if (status === 200) {
+          this.$message.success(`已删除记录 ${this.date.date_name}`);
+          this.reload();
+        } else {
+          this.$message.error(msg);
+        }
+      }).catch(err => {
+        this.$message.error(err);
+      });
+
+
+    }
   }
 }
 
@@ -141,14 +184,5 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-}
-
-.text {
-  font-size: 14px;
-}
-
-.item {
-  margin-bottom: 18px;
 }
 </style>
