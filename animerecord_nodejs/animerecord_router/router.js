@@ -154,6 +154,44 @@ router.post('/deleteAnimeRecord', (req, res) => {
   });
 });
 
+router.post('/updateRecordDateName', (req, res) =>{
+  let {date_id, date_name} = req.body;
+  let sql = `update anime_date set date_name='${date_name}' where date_id='${date_id}'`;
+  db.query(sql, (err, results) =>{
+    if(err){
+      res.send({
+        status: 400,
+        msg: '更新追番日期失败',
+        data: err.message
+      });
+    }else{
+      res.send({
+        status: 200,
+        msg: 'success',
+        data: results
+      });
+    }
+  });
+});
 
+router.post('/deleteAnime', (req, res) =>{
+  let {record_id, date_id, anime_name} = req.body;
+  let sql = `delete from anime_record where record_id='${record_id}' and date_id='${date_id}' and anime_name='${anime_name}'`;
+  db.query(sql, (err, results) =>{
+    if(err){
+      res.send({
+        status: 400,
+        msg: '删除动画记录失败',
+        data: err.message
+      });
+    }else{
+      res.send({
+        status: 200,
+        msg: 'success',
+        data: results
+      });
+    }
+  });
+});
 
 module.exports = router;

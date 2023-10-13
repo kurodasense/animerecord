@@ -24,8 +24,11 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
   * card-item的展示 ✔
   * card-item的点击单元格即可修改：双击单元格切换成输入框做修改，并且输入框自动对焦。输入框失去焦点时切换回原样并保存数据 ✔
   * card-item的删除: 删除对应的追番记录表 ✔
+  * card-item的追番日期修改 ✔
 * 归档:
-  * todo
+  * 将所有的追番记录用时间线的方式列出来 ✔
+  * 添加追番记录的删除，删除一个追番表中的动画 ✔
+  * 调大点时间线的时间标题字体(隐藏原有的timestamp，自己做了一个) ✔
 * 添加追番日期:
   * 点击后右边弹出一个框，然后可以输入追番日期，确认就是提交，点击空白处就是退出来 ✔
   * 添加完毕后，在主页中能马上出现新的追番记录表(使用inject来做) ✔
@@ -40,6 +43,12 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
     * '/updateNewAnimeWatchStatus': 修改追番记录的观看状态 ✔
     * '/addNewAnimeDate': 增添新的追番日期 ✔
     * '/deleteAnimeRecord': 根据date_name删除anime_date的追番日期，并且也删除anime_record中的追番记录 ✔
+    * '/updateRecordDateName': 根据date_id修改date_name ✔
+    * '/deleteAnime': 删除一个追番表中的动画 ✔
+* 部署到aliyun linux服务器:
+  * 开放端口 ✔
+  * 部署node.js后端 ✔
+  * 部署vue前端到nginx ✔
 ### Predecided framework
 ![Alt text](framework.png)
 

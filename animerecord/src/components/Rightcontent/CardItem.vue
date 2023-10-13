@@ -2,7 +2,11 @@
   <el-card class="box-card">
     <template #header>
       <div class="card-header">
-        <span>{{ date.date_name }}</span>
+        <span v-if="isUpdateDateName" style="width: 80px;">
+          <el-input v-model="date.date_name" ref="dateNameInput" @blur="hideUpdateDateName"
+            @change="updateDateName"></el-input>
+        </span>
+        <span v-else @dblclick="dblClick">{{ date.date_name }}</span>
         <div style="text-align: right;">
           <el-popover placement="top" trigger="click">
             <template #reference>
@@ -18,7 +22,7 @@
       </div>
     </template>
     <el-scrollbar height="300px">
-      <el-empty v-if="record[0] == null" description="暂无记录捏" />
+      <el-empty v-if="record.length <= 0" description="暂无记录捏" />
       <el-table v-else :data="record" border style="width: 100%" :show-header="false" :cell-style="cellStyle"
         :row-class-name="tableRowClassName" @cell-dblclick="tabClick">
         <el-table-column prop="anime_name" label="anime_name" width="auto">
@@ -45,8 +49,7 @@
 </template>
 
 <script>
-import { getAnimeRecordByDateId, updateNewAnimeRecord, deleteAnimeRecord, updateNewAnimeWatchStatus } from "@/network/api";
-import { ElStep } from "element-plus";
+import { getAnimeRecordByDateId, updateNewAnimeRecord, deleteAnimeRecord, updateNewAnimeWatchStatus, updateRecordDateName } from "@/network/api";
 export default {
   name: 'CardItem',
   inject: ['reload'],
@@ -58,26 +61,11 @@ export default {
       record: [],
       tabClickIndex: null, // 当前点击的单元格
       tabClickLabel: '', // 当前点击的列名
+      isUpdateDateName: false
     }
   },
   created() {
     this.getAnimeRecord();
-    // 格式化时间
-    Date.prototype.Format = function (fmt) {
-      var o = {
-        "M+": this.getMonth() + 1, //月份 
-        "d+": this.getDate(), //日 
-        "H+": this.getHours(), //小时 
-        "m+": this.getMinutes(), //分 
-        "s+": this.getSeconds(), //秒 
-        "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
-        "S": this.getMilliseconds() //毫秒 
-      };
-      if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-      for (var k in o)
-        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-      return fmt;
-    }
   },
   methods: {
     getAnimeRecord() {
@@ -145,7 +133,7 @@ export default {
         if (status === 200) {
           // todo
         } else {
-          this.$message.error(err);
+          this.$message.error(msg);
         }
       }).catch(err => {
         this.$message.error(err);
@@ -166,8 +154,27 @@ export default {
       }).catch(err => {
         this.$message.error(err);
       });
-
-
+    },
+    dblClick() {
+      this.isUpdateDateName = true;
+      this.$nextTick(() => {
+        this.$refs.dateNameInput.focus();
+      });
+    },
+    hideUpdateDateName() {
+      this.isUpdateDateName = false;
+    },
+    updateDateName() {
+      updateRecordDateName(this.date.date_id, this.date.date_name).then(res =>{
+        let {status, msg, data} = res.data;
+        if (status === 200){
+          this.isUpdateDateName = false;
+        }else{
+          this.$message.error(msg);
+        }
+      }).catch(err =>{
+        this.$message.error(err);
+      });
     }
   }
 }

@@ -46,3 +46,19 @@ export async function deleteAnimeRecord(date_id){
     data: {date_id}
   })
 }
+
+export async function updateRecordDateName(date_id, date_name){
+  return await request({
+    url: '/api/updateRecordDateName',
+    method: 'post',
+    data: {date_id, date_name}
+  })
+}
+
+export async function deleteAnime(record_id, date_id, anime_name){
+  return await request({
+    url: '/api/deleteAnime',
+    method: 'post',
+    data: {record_id, date_id, anime_name}
+  })
+}
