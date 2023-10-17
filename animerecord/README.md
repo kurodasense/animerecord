@@ -50,7 +50,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
   * 部署node.js后端 ✔
   * 部署vue前端到nginx ✔
 ### Predecided framework
-![Alt text](framework.png)
+![Alt text](./framework.png)
 
 前端: vue3+element plus
 后端: node.js+express+mysql
