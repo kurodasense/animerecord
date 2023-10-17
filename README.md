@@ -48,4 +48,4 @@ node app.js
   * 开放端口 ✔
   * 部署node.js后端 ✔
   * 部署vue前端到nginx ✔
-* 添加网页图标 
+* 添加网页图标 ✔
