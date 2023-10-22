@@ -4,6 +4,16 @@
 /* 自定义属性只有后代才能使用 */
 :root {
   --color-background: #f5f7f8;
+  --color-text: #000;
+  --font-weight: 900;
+
+  --timestamp-title-color: #909399;
+  --timestamp-title-font-size: 15px;
+
+  --nav-font-size: 20px;
+  --nav-font-weight: 700;
+  --nav-active-background-color: #fff;
+  --nav-hover-background-color: #dee2e3;
 }
 *,
 *::before,

@@ -52,9 +52,9 @@ export default {
 
   .timestamp {
     text-align: left;
-    font-size: 15px;
-    font-weight: 900;
-    color: #909399;
+    font-size: var(--timestamp-title-font-size);
+    font-weight: var(--font-weight);
+    color: var(--timestamp-title-color);
     margin-bottom: 8px;
     padding-top: 4px;
   }

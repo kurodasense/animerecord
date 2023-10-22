@@ -57,8 +57,8 @@ export default {
     display: flex;
     align-items: center;
     width: 100%;
-    font-size: 20px;
-    font-weight: 700;
+    font-size: var(--nav-font-size);
+    font-weight: var(--nav-font-weight);
     margin-left: 25px;
 
     .item-icon {
@@ -73,12 +73,12 @@ export default {
 }
 
 .active {
-  background-color: white;
+  background-color: var(--nav-active-background-color);
 }
 
 .nonActive {
   &:hover {
-    background-color: #dee2e3;
+    background-color: var(--nav-hover-background-color);
     transition: background-color .2s;
   }
 }
