@@ -1,4 +1,5 @@
 # animerecord
+使用vscode开发。
 前端: vuecli+vue3+element plus+nginx。
 * 虽然是用vue3，但还是用的vue2语法(还没了解vue3的新特性)，打算以后边学边用vue3语法代替完。
 * 使用nginx来作为前端网页服务器(做前后端分离)
@@ -52,7 +53,12 @@ node app.js
 * record_id: 使用年月日时分秒的形式来作为唯一id
 * date_id: 外键
 
-## TODO
+## 项目的一些改进 TODO
+* 添加网页图标 ✔
+* 添加项目描述 ✔
+* 使用less来替换原先的css格式(也没什么要替换的，只是用了嵌套改写了一些css代码)
+
+## 项目主要功能 TODO
 * 左侧导航栏(首页, 归档, 添加追番日期) ✔
 * 首页:
   * card-item的展示 ✔
@@ -83,5 +89,3 @@ node app.js
   * 开放端口 ✔
   * 部署node.js后端 ✔
   * 部署vue前端到nginx ✔
-* 添加网页图标 ✔
-* 添加项目描述 ✔

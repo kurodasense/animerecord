@@ -12,7 +12,7 @@
 
 </script>
 
-<style scopoed>
+<style scopoed lang="less">
   #nav-content{
     width: auto;
     display: flex;

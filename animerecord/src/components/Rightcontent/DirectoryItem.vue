@@ -81,4 +81,4 @@ export default {
 
 </script>
 
-<style scoped></style>
+<style scoped lang="less"></style>

@@ -180,16 +180,18 @@ export default {
 }
 
 </script>
-<style scoped>
+<style scoped lang="less">
 .box-card {
   width: 400px;
   height: 400px;
   margin: 10px 20px;
-}
 
-.card-header {
+  .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+}
+
+
 </style>

@@ -1,9 +1,6 @@
 <template>
   <el-popover placement="right" trigger="click" @hide="hidePopover" :width="300">
-    <el-input 
-      v-model="date_name" 
-      @keyup.enter.native="enterConfirm"
-      placeholder="请输入追番日期" />
+    <el-input v-model="date_name" @keyup.enter.native="enterConfirm" placeholder="请输入追番日期" />
     <div style="text-align: right; margin-top: 10px">
       <el-button size="small" type="primary" @click="confirm">确认</el-button>
     </div>
@@ -22,7 +19,7 @@
 </template>
 
 <script>
-import {addNewAnimeDate} from "@/network/api";
+import { addNewAnimeDate } from "@/network/api";
 export default {
   name: 'NavButton',
   inject: ['reload'],
@@ -54,21 +51,21 @@ export default {
       this.isActive = false;
       this.date_name = '';
     },
-    confirm(){
-      addNewAnimeDate(this.date_name).then(res =>{
-        let {status, msg, data} = res.data;
-        if(status === 200){
+    confirm() {
+      addNewAnimeDate(this.date_name).then(res => {
+        let { status, msg, data } = res.data;
+        if (status === 200) {
           this.$message.success(`添加记录 ${this.date_name}`);
           this.date_name = '';
           this.reload();
-        }else{
+        } else {
           this.$message.error(msg);
         }
-      }).catch(err =>{
+      }).catch(err => {
         this.$message.error(err);
       });
     },
-    enterConfirm(){
+    enterConfirm() {
       this.confirm();
     }
   }
@@ -76,7 +73,7 @@ export default {
 
 </script>
 
-<style scoped>
+<style scoped lang="less">
 #nav-item {
   margin: 20px 20px 20px 10px;
   padding: 10px 20px 10px 10px;
@@ -86,32 +83,34 @@ export default {
   display: flex;
   flex-direction: row;
   align-content: flex-start;
-}
 
-.item {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  font-size: 20px;
-  font-weight: 700;
-  margin-left: 25px;
-}
+  .item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    font-size: 20px;
+    font-weight: 700;
+    margin-left: 25px;
 
-.item-icon {
-  position: relative;
-  top: 2.5px;
-}
+    .item-icon {
+      position: relative;
+      top: 2.5px;
+    }
 
-.item-text {
-  width: 100%;
+    .item-text {
+      width: 100%;
+    }
+  }
 }
 
 .active {
   background-color: white;
 }
 
-.nonActive:hover {
-  background-color: #dee2e3;
-  transition: background-color .2s;
+.nonActive {
+  &:hover {
+    background-color: #dee2e3;
+    transition: background-color .2s;
+  }
 }
 </style>

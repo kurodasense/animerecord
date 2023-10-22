@@ -2,9 +2,9 @@
   <div id="directory">
     <el-empty v-if="this.anime_date <= 0" class="empty-center" description='暂无追番记录' />
     <el-timeline v-else :reverse="true">
-      <el-timeline-item v-for="date in anime_date" type="primary" :hollow="true" :timestamp="date.date_name" :hide-timestamp="true"
-        placement="top" size="large">
-        <div class="timestamp" >
+      <el-timeline-item v-for="date in anime_date" type="primary" :hollow="true" :timestamp="date.date_name"
+        :hide-timestamp="true" placement="top" size="large">
+        <div class="timestamp">
           {{ date.date_name }}
         </div>
         <DirectoryItem :date="date" />
@@ -46,16 +46,18 @@ export default {
 
 </script>
 
-<style scoped>
+<style scoped lang="less">
 #directory {
   margin-top: 20px;
-}
-.timestamp{
-  text-align: left;
-  font-size: 15px;
-  font-weight: 900;
-  color: #909399;
-  margin-bottom: 8px;
-  padding-top: 4px;
+
+  .timestamp {
+    text-align: left;
+    font-size: 15px;
+    font-weight: 900;
+    color: #909399;
+    margin-bottom: 8px;
+    padding-top: 4px;
+  }
+
 }
 </style>

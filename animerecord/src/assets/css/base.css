@@ -1,6 +1,7 @@
 @import "./normalize.css";
 /*:root: 伪类*/
 /*:root -> 获取根元素html*/
+/* 自定义属性只有后代才能使用 */
 :root {
   --color-background: #f5f7f8;
 }

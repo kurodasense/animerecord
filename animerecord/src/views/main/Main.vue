@@ -20,24 +20,25 @@ export default {
   components: { NavMain, CardItem }
 }
 </script>
-<style scoped>
+
+<style scoped lang="less">
 #main {
   display: flex;
   flex: 1;
   margin: 0 auto;
   align-items: flex-start;
-}
 
-.left-nav {
-  position: sticky;
-  top: 0px;
-  width: 500px;
-  margin: 0 25px;
-}
+  .left-nav {
+    position: sticky;
+    top: 0px;
+    width: 500px;
+    margin: 0 25px;
+  }
 
-.right-content {
-  width: 100%;
-  height: 100%;
-  margin: 0 25px 0 50px;
+  .right-content {
+    width: 100%;
+    height: 100%;
+    margin: 0 25px 0 50px;
+  }
 }
 </style>
