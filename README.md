@@ -3,6 +3,7 @@
 前端: vuecli+vue3+element plus+nginx。
 * 虽然是用vue3，但还是用的vue2语法(还没了解vue3的新特性)，打算以后边学边用vue3语法代替完。
 * 使用nginx来作为前端网页服务器(做前后端分离)
+
 后端: node.js+express+mysql。
 * 使用node.js作为服务端，并使用pm2来进行管理且部署到服务器。
 * 使用express框架来做为web框架处理路由。
