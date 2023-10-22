@@ -1,4 +1,5 @@
 # animerecord
+
 使用vscode开发。
 前端: vuecli+vue3+element plus+nginx。
 * 虽然是用vue3，但还是用的vue2语法(还没了解vue3的新特性)，打算以后边学边用vue3语法代替完。
@@ -57,7 +58,7 @@ node app.js
 ## 项目的一些改进 TODO
 * 添加网页图标 ✔
 * 添加项目描述 ✔
-* 使用less来替换原先的css格式(也没什么要替换的，只是用了嵌套改写了一些css代码)
+* 使用less来替换原先的css格式(也没什么要替换的，只是用了嵌套改写了一些css代码) ✔
 
 ## 项目主要功能 TODO
 * 左侧导航栏(首页, 归档, 添加追番日期) ✔
