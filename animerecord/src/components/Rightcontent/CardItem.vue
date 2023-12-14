@@ -1,5 +1,5 @@
 <template>
-  <el-card class="box-card">
+  <el-card class="box-card" v-loading="card_loading">
     <template #header>
       <div class="card-header">
         <span v-if="isUpdateDateName" style="width: 80px;">
@@ -61,7 +61,8 @@ export default {
       record: [],
       tabClickIndex: null, // 当前点击的单元格
       tabClickLabel: '', // 当前点击的列名
-      isUpdateDateName: false
+      isUpdateDateName: false,
+      card_loading: false // 展示加载动画
     }
   },
   created() {
@@ -112,47 +113,60 @@ export default {
       if (record_id == null) {
         record_id = new Date().Format("yyyyMMddHHmmss");
       }
+      this.card_loading = true;
       updateNewAnimeRecord(record_id, this.date.date_id, row.anime_name, row.watch_status).then(res => {
         let { status, msg, data } = res.data;
         if (status === 200) {
           // todo
           row.record_id = record_id;
+          this.card_loading = false;
         } else {
           this.$message.error(msg);
+          this.card_loading = false;
         }
       }).catch(err => {
-        this.$message.error(msg);
+        this.$message.error(err);
+        this.card_loading = false;
       });
     },
     updateWatchStatus(row) {
       this.tabClickIndex = null;
       this.tabClickLabel = '';
       let { record_id, anime_name, watch_status } = row;
+      this.card_loading = true;
       updateNewAnimeWatchStatus(record_id, this.date.date_id, anime_name, watch_status).then(res => {
         let { status, msg, data } = res.data;
         if (status === 200) {
           // todo
+          this.card_loading = false;
         } else {
           this.$message.error(msg);
+          this.card_loading = false;
         }
       }).catch(err => {
         this.$message.error(err);
+        this.card_loading = false;
       });
+      
     },
     addRecord() {
       this.record.push({ anime_name: 'new anime', watch_status: '待看' });
     },
     delRecord() {
+      this.card_loading = true;
       deleteAnimeRecord(this.date.date_id).then(res => {
         let { status, msg, data } = res.data;
         if (status === 200) {
           this.$message.success(`已删除记录 ${this.date.date_name}`);
+          this.card_loading = false;
           this.reload();
         } else {
           this.$message.error(msg);
+          this.card_loading = false;
         }
       }).catch(err => {
         this.$message.error(err);
+        this.card_loading = false;
       });
     },
     dblClick() {
@@ -165,15 +179,19 @@ export default {
       this.isUpdateDateName = false;
     },
     updateDateName() {
+      this.card_loading = true;
       updateRecordDateName(this.date.date_id, this.date.date_name).then(res =>{
         let {status, msg, data} = res.data;
         if (status === 200){
           this.isUpdateDateName = false;
+          this.card_loading = false;
         }else{
           this.$message.error(msg);
+          this.card_loading = false;
         }
       }).catch(err =>{
         this.$message.error(err);
+        this.card_loading = false;
       });
     }
   }

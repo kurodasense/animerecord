@@ -1,11 +1,11 @@
 <template>
-  <el-popover placement="right" trigger="click" @hide="hidePopover" :width="300">
+  <el-popover placement="right" trigger="click" @hide="hidePopover" :width="300" >
     <el-input v-model="date_name" @keyup.enter.native="enterConfirm" placeholder="请输入追番日期" />
     <div style="text-align: right; margin-top: 10px">
       <el-button size="small" type="primary" @click="confirm">确认</el-button>
     </div>
     <template #reference>
-      <div id="nav-item" style="cursor: pointer;" :class="{ active: isActive, nonActive: !isActive }" @click="itemClick">
+      <div id="nav-item" style="cursor: pointer;" :class="{ active: isActive, nonActive: !isActive }" @click="itemClick" >
         <div class="item">
           <div class="item-icon"><el-icon :size="25" :color="iconColor">
               <slot name="item-icon" />

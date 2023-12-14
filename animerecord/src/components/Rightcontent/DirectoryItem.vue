@@ -1,7 +1,10 @@
 <template>
   <el-card>
     <el-empty v-if="record.length <= 0" description="暂无记录捏" />
-    <el-table v-else :data="record" border style="width: 100%" :show-header="false" :cell-style="cellStyle">
+    <el-table v-else :data="record" 
+    border style="width: 100%" 
+    :show-header="false" 
+    :cell-style="cellStyle" v-loading="card_loading">
       <el-table-column prop="anime_name" label="anime_name" width="auto">
       </el-table-column>
       <el-table-column prop="watch_status" label="watch_status" width="90" align="center">
@@ -33,7 +36,8 @@ export default {
   },
   data() {
     return {
-      record: []
+      record: [],
+      card_loading: false
     }
   },
   created() {
@@ -41,15 +45,19 @@ export default {
   },
   methods: {
     getAnimeRecord() {
+      this.card_loading = true;
       getAnimeRecordByDateId(this.date.date_id).then(res => {
         let { status, msg, data } = res.data;
         if (status === 200) {
           this.record = data;
+          this.card_loading = false;
         } else {
           this.$message.error(msg);
+          this.card_loading = false;
         }
       }).catch(err => {
         this.$message.error(err);
+        this.card_loading = false;
       });
     },
     cellStyle({ row, column, rowIndex, columnIndex }) {
@@ -64,16 +72,20 @@ export default {
     },
     delAnime(row) {
       let { record_id, date_id, anime_name } = row;
+      this.card_loading = true;
       deleteAnime(record_id, date_id, anime_name).then(res =>{
         let {status, msg, data} = res;
         if(status === 200){
           // todo
           this.record.splice(this.record.indexOf(row), 1);
+          this.card_loading = false;
         }else{
           this.$message.error(msg);
+          this.card_loading = false;
         }
       }).catch(err =>{
         this.$message.error(err);
+        this.card_loading = false;
       });
     }
   }
