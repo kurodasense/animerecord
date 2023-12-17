@@ -1,7 +1,7 @@
 <template>
   <div id="home" v-loading="home_loading">
     <el-empty class="empty-center" description='暂无追番记录' v-if="anime_date.length == 0" />
-    <CardItem v-else v-for="date in anime_date" :date="date" />
+    <CardItem v-else v-for="date in anime_date" :date="date" :key="date.date_id" />
   </div>
 </template>
 

@@ -14,7 +14,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use('/api', router);
 
-let listen_port = 8090;
+let listen_port = 8091;
 app.listen(listen_port, () =>{
   console.log(`animerecord server running in port ${listen_port}.`);
 });
