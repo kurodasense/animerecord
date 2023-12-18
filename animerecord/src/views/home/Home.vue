@@ -1,7 +1,7 @@
 <template>
   <div id="home" v-loading="home_loading">
     <el-empty class="empty-center" description='暂无追番记录' v-if="anime_date.length == 0" />
-    <CardItem v-else v-for="date in anime_date" :date="date" :key="date.date_id" />
+    <CardItem v-else v-for="date in sortedAnimeDates" :date="date" :key="date.date_id" />
   </div>
 </template>
 
@@ -16,6 +16,19 @@ export default {
     return {
       anime_date: [],
       home_loading: false
+    }
+  },
+  computed: {
+    sortedAnimeDates(){
+      return this.anime_date.toSorted((a, b) =>{
+        let [a_year, a_month] = a.date_name.split('.');
+        let [b_year, b_month] = b.date_name.split('.');
+        if(a_year > b_year) return 1;
+        else if(a_year < b_year) return -1;
+        else if(a_year == b_year){
+          return a_month < b_month
+        }
+      });
     }
   },
   created() {

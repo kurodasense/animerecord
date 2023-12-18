@@ -2,7 +2,7 @@
   <div id="directory" v-loading="directory_loading">
     <el-empty v-if="this.anime_date <= 0" class="empty-center" description='暂无追番记录' />
     <el-timeline v-else :reverse="true">
-      <el-timeline-item v-for="date in anime_date" :key="date.date_id" type="primary" :hollow="true" :timestamp="date.date_name"
+      <el-timeline-item v-for="date in sortedAnimeDates" :key="date.date_id" type="primary" :hollow="true" :timestamp="date.date_name"
         :hide-timestamp="true" placement="top" size="large">
         <div class="timestamp">
           {{ date.date_name }}
@@ -23,6 +23,19 @@ export default {
     return {
       anime_date: [],
       directory_loading: false
+    }
+  },
+  computed: {
+    sortedAnimeDates(){
+      return this.anime_date.toSorted((a, b) =>{
+        let [a_year, a_month] = a.date_name.split('.');
+        let [b_year, b_month] = b.date_name.split('.');
+        if(a_year > b_year) return 1;
+        else if(a_year < b_year) return -1;
+        else if(a_year == b_year){
+          return a_month < b_month
+        }
+      });
     }
   },
   created() {

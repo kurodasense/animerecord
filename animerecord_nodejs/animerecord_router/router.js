@@ -23,7 +23,8 @@ Date.prototype.Format = function (fmt) {
 
 // 获取所有的追番日期
 router.get('/getAnimeDate', (req, res) => {
-  let sql = `select date_id, date_name from anime_date order by STR_TO_DATE(date_name, '%Y.%m') ASC`;
+  // let sql = `select date_id, date_name from anime_date order by STR_TO_DATE(date_name, '%Y.%m') ASC`;
+  let sql = `select date_id, date_name from anime_date`;
   db.query(sql, (err, results) => {
     if (err) {
       res.send({
