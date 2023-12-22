@@ -2,7 +2,7 @@
 
 使用vscode开发。
 前端: vuecli+vue3+element plus+nginx。
-* 虽然是用vue3，但还是用的vue2的语法来写，比如options api(目前还没了解vue3的新特性)，打算以后边学边用vue3语法代替完，比如用composition api来代替options api。
+* 虽然是用vue3，但还是用的vue2的options api来写，打算以后边学边用composition api来代替options api。
 * 使用nginx来作为前端网页服务器(做前后端分离)
 
 后端: node.js+express+mysql。
