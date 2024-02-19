@@ -2,6 +2,7 @@
 
 使用vscode开发。
 前端: vuecli+vue3+element plus+nginx。
+
 * 虽然是用vue3，但还是用的vue2的options api来写，打算以后边学边用composition api来代替options api。
 * 使用nginx来作为前端网页服务器(做前后端分离)
 
@@ -9,7 +10,11 @@
 * 使用node.js作为服务端，并使用pm2来进行管理且部署到服务器。
 * 使用express框架来做为web框架处理路由。
 * 使用mysql作为数据库，并且为了简单只设计了2个数据表。
-## 前端运行
+
+这个项目我目前是做成了网页的形式，因为在网站上看完一部番后可以直接打开我这个追番记录页面进行记录。但是其实我觉得做成桌面端的优势更大于网页端。如果做成桌面端其实更方便其他人的个人使用。因此，后续打算使用electron来做一个。
+
+## 前端网页运行
+
 ```
 cd ./animerecord
 npm install
