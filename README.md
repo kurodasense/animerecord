@@ -47,7 +47,7 @@ node app.js
 * “删除记录表”会删除当前追番记录表，其会弹出一个框做二次确认。
 * 如果表中无数据会展示“空状态(empty)”图片。
 ### 移动端
-![Alt text](./project_screetshoot/phone_home.jpg){:height="50%" width="50%"}
+![Alt text](./project_screetshoot/phone_home.jpg)
 
 ### 归档
 ![Alt text](./project_screetshoot/directory.png)
