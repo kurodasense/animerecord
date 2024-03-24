@@ -1,23 +1,31 @@
 <template>
-  <div id="nav-content">
+  <div class="nav-content">
     <slot></slot>
   </div>
 </template>
 
 <script>
-  export default{
-    name: 'NavContent',
-    
-  }
-
+export default {
+  name: "NavContent",
+};
 </script>
 
 <style scopoed lang="less">
-  #nav-content{
+@media (min-width: 768px) {
+  .nav-content {
     width: auto;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
-    box-shadow: 0 7px 10px 5px rgba(134,140,146,.3);
+    box-shadow: 0 7px 10px 5px rgba(134, 140, 146, 0.3);
   }
+}
+
+@media (max-width: 768px) {
+  .nav-content {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+}
 </style>

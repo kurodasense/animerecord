@@ -1,5 +1,5 @@
 <template>
-  <div id="nav-main">
+  <div class="nav-main">
     <NavContent>
       <!-- 主页 -->
       <NavItem path="/main/home" name="首页" activeColor="#2a5caa">
@@ -24,21 +24,29 @@
 </template>
 
 <script>
-import NavContent from "@/components/Leftnav/NavContent"
-import NavItem from "@/components/Leftnav/NavItem"
-import NavButton from "@/components/Leftnav/NavButton"
+import NavContent from "@/components/Leftnav/NavContent";
+import NavItem from "@/components/Leftnav/NavItem";
+import NavButton from "@/components/Leftnav/NavButton";
 export default {
-  name: 'NavMain',
+  name: "NavMain",
   components: { NavContent, NavItem, NavButton },
-}
-
+};
 </script>
 
 <style scoped>
-  #nav-main {
+@media (min-width: 768px) {
+  .nav-main {
     width: 250px;
     height: 300px;
     margin: 0 auto;
     padding-top: 20px;
   }
+}
+@media (max-midth: 768px) {
+  .nav-main {
+    width: 100%;
+    position: fixed;
+    z-index: 100;
+  }
+}
 </style>
