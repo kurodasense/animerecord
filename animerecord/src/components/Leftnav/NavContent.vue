@@ -13,7 +13,6 @@ export default {
 <style scopoed lang="less">
 @media (min-width: 768px) {
   .nav-content {
-    width: auto;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
@@ -26,6 +25,8 @@ export default {
     width: 100%;
     display: flex;
     flex-direction: row;
+    overflow-x: auto;
+    flex-wrap: nowrap;
   }
 }
 </style>

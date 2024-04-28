@@ -112,9 +112,12 @@ export default {
 }
 @media (max-width: 768px) {
   .nav-item {
-    width: 100px;
+    width: 100%;
+    max-width: fit-content;
     margin: 20px 10px;
     border-radius: 0px;
+    box-sizing: border-box;
+
     .item {
       margin: 0px;
       .item-text {

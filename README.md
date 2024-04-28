@@ -38,6 +38,7 @@ node app.js
 ![Alt text](framework.png)
 
 ## 网页展示
+
 ### 首页
 ![Alt text](./project_screetshoot/home.png)
 * 按时间升序的方式排列出每个追番记录表，其中每个表用卡片做展示。
@@ -46,20 +47,27 @@ node app.js
 * “添加追番”会对当前记录表增添一行记录，但是只有对其做修改了才会提交修改并保留，否则在刷新页面或者切换到别的页面时会自动删除。
 * “删除记录表”会删除当前追番记录表，其会弹出一个框做二次确认。
 * 如果表中无数据会展示“空状态(empty)”图片。
-### 移动端
-![Alt text](./project_screetshoot/phone_home.jpg)
+
 
 ### 归档
 ![Alt text](./project_screetshoot/directory.png)
 * 以时间线为主题将所有的追番记录列出来(老实说，我觉得用来做主页展示好像更好看点)。
 * 如果某个追番日期下无数据，会展示“空状态(empty)”图片。
 * 添加对某一个追番记录表中的动画记录做删除，其会弹出一个框做二次确认。
-![Alt text](./project_screetshoot/phone_directory.jpg)
+
 
 ### 添加追番日期
 ![Alt text](./project_screetshoot/add.jpg)
 * 其会向右弹出一个框来输入追番日期从而添加一个追番记录表。当确认添加后会刷新一次首页组件从而再读取数据。(向首页组件添加`inject: ['reload']`)。
-![Alt text](./project_screetshoot/phone_add.jpg)
+
+### 响应式布局+移动端适配
+* 使用grid布局实现响应式布局：
+
+![Alt text](./project_screetshoot/responsive.gif)
+
+* 使用媒体查询实现移动端适配：
+
+<img src="./project_screetshoot/phone.gif" style="zoom: 50%">
 
 ## mysql数据表
 ### anime_date

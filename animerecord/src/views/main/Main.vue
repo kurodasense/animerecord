@@ -24,38 +24,42 @@ export default {
 @media (min-width: 768px) {
   .main {
     display: flex;
-    flex: 1;
     margin: 0 auto;
     align-items: flex-start;
 
     .left-nav {
       position: sticky;
+      margin-left: 10px;
       top: 0px;
       width: 500px;
-      margin: 0 25px;
     }
 
     .right-content {
+      box-sizing: border-box;
+      padding-right: 100px;
       width: 100%;
       height: 100%;
-      margin: 0 25px 0 50px;
     }
   }
 }
 
 @media (max-width: 768px) {
-  .left-nav {
-    left: 0;
-    bottom: 0;
+  .main {
+    position: relative;
     width: 100%;
-    position: fixed;
-    z-index: 999999;
-    background-color: var(--color-background);
-  }
-  .right-content {
-    width: 100%;
-    height: 100%;
-    padding-bottom: 90px;
+    .left-nav {
+      bottom: 0;
+      width: 100%;
+      height: 90px;
+      position: fixed;
+      z-index: 99;
+      background-color: var(--color-background);
+    }
+    .right-content {
+      width: 100%;
+      height: 100%;
+      padding-bottom: 90px;
+    }
   }
 }
 </style>

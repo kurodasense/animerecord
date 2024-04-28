@@ -83,6 +83,20 @@ export default {
     }
   }
 }
+@media (max-width: 768px) {
+  .nav-item {
+    width: 100%;
+    margin: 20px 10px;
+    border-radius: 0px;
+    box-sizing: border-box;
+    .item {
+      margin: 0px;
+      .item-text {
+        margin-left: 8px;
+      }
+    }
+  }
+}
 .active {
   background-color: var(--nav-active-background-color);
 }

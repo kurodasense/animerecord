@@ -42,11 +42,4 @@ export default {
     padding-top: 20px;
   }
 }
-@media (max-midth: 768px) {
-  .nav-main {
-    width: 100%;
-    position: fixed;
-    z-index: 100;
-  }
-}
 </style>
