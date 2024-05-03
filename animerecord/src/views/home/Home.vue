@@ -59,7 +59,8 @@ export default {
           }
         })
         .catch((err) => {
-          this.$message.error(err);
+          const { status, msg, data } = err.response.data;
+          this.$message.error(msg);
           this.home_loading = false;
         });
     },
@@ -94,7 +95,7 @@ export default {
 
     .empty-center {
       margin: auto;
-      width: 50%;
+      width: 100%;
     }
   }
 }

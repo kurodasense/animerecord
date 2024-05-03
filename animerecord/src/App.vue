@@ -18,7 +18,6 @@ export default {
         }, delay);
       };
     };
-
     const _ = window.ResizeObserver;
     window.ResizeObserver = class ResizeObserver extends _ {
       constructor(callback) {

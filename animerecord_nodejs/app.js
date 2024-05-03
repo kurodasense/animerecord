@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-const router = require("./animerecord_router/router");
-
+const api_router = require("./animerecord_router/api_router");
+const permission_router = require("./animerecord_router/permission_router");
 // 创建web服务器
 const app = express();
 
@@ -12,9 +12,10 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 // 使post请求可以用req.body接受参数
 app.use(express.json());
-app.use("/api", router);
+app.use("/api", api_router);
+app.use("/permission", permission_router);
 
-let listen_port = 8091;
+const listen_port = 8091;
 app.listen(listen_port, () => {
   console.log(`animerecord server running in port ${listen_port}.`);
 });

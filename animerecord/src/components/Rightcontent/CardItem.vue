@@ -126,7 +126,8 @@ export default {
           }
         })
         .catch((err) => {
-          this.$message.error(err);
+          const { status, msg, data } = err.response.data;
+          this.$message.error(msg);
         });
     },
     cellStyle({ row, column, rowIndex, columnIndex }) {
@@ -175,12 +176,14 @@ export default {
             row.record_id = record_id;
             this.card_loading = false;
           } else {
+            const { status, msg, data } = err.response.data;
             this.$message.error(msg);
             this.card_loading = false;
           }
         })
         .catch((err) => {
-          this.$message.error(err);
+          const { status, msg, data } = err.response.data;
+          this.$message.error(msg);
           this.card_loading = false;
         });
     },
@@ -201,12 +204,14 @@ export default {
             // todo
             this.card_loading = false;
           } else {
+            const { status, msg, data } = err.response.data;
             this.$message.error(msg);
             this.card_loading = false;
           }
         })
         .catch((err) => {
-          this.$message.error(err);
+          const { status, msg, data } = err.response.data;
+          this.$message.error(msg);
           this.card_loading = false;
         });
     },
@@ -223,12 +228,14 @@ export default {
             this.card_loading = false;
             this.reload();
           } else {
+            const { status, msg, data } = err.response.data;
             this.$message.error(msg);
             this.card_loading = false;
           }
         })
         .catch((err) => {
-          this.$message.error(err);
+          const { status, msg, data } = err.response.data;
+          this.$message.error(msg);
           this.card_loading = false;
         });
     },
@@ -250,12 +257,14 @@ export default {
             this.isUpdateDateName = false;
             this.card_loading = false;
           } else {
+            const { status, msg, data } = err.response.data;
             this.$message.error(msg);
             this.card_loading = false;
           }
         })
         .catch((err) => {
-          this.$message.error(err);
+          const { status, msg, data } = err.response.data;
+          this.$message.error(msg);
           this.card_loading = false;
         });
     },

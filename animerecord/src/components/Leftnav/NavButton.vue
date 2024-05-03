@@ -1,9 +1,9 @@
 <template>
   <el-popover trigger="click" @hide="hidePopover" :width="300">
     <el-input
-      v-model="date_name"
+      v-model="inputValue"
       @keyup.enter.native="enterConfirm"
-      placeholder="请输入追番日期"
+      :placeholder="placeholder"
     />
     <div style="text-align: right; margin-top: 10px">
       <el-button size="small" type="primary" @click="confirm">确认</el-button>
@@ -27,21 +27,20 @@
     </template>
   </el-popover>
 </template>
-
 <script>
-import { addNewAnimeDate } from "@/network/api";
 export default {
   name: "NavButton",
-  inject: ["reload"],
+  emits: ["handleConfirm"],
   props: {
     name: String,
     activeColor: String,
+    placeholder: String,
   },
   data() {
     return {
       isActive: false,
-      date_name: "",
       visible: false,
+      inputValue: "",
     };
   },
   computed: {
@@ -59,23 +58,11 @@ export default {
     },
     hidePopover() {
       this.isActive = false;
-      this.date_name = "";
+      this.value = "";
     },
     confirm() {
-      addNewAnimeDate(this.date_name)
-        .then((res) => {
-          let { status, msg, data } = res.data;
-          if (status === 200) {
-            this.$message.success(`添加记录 ${this.date_name}`);
-            this.date_name = "";
-            this.reload();
-          } else {
-            this.$message.error(msg);
-          }
-        })
-        .catch((err) => {
-          this.$message.error(err);
-        });
+      const payload = { inputValue: this.inputValue };
+      this.$emit("handleConfirm", payload);
     },
     enterConfirm() {
       this.confirm();
