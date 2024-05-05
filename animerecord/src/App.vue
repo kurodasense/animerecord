@@ -58,4 +58,17 @@ export default {
   color: #2c3e50;
   height: 100%;
 }
+@media (prefers-color-scheme: dark) {
+  html {
+    filter: invert(1) hue-rotate(180deg);
+    transition: color 300ms, background-color 300ms; // 添加过渡动画
+  }
+  img,
+  svg,
+  video {
+    filter: invert(1) hue-rotate(180deg);
+    transition: color 300ms, background-color 300ms; // 添加过渡动画
+    opacity: 0.8; // 添加透明度
+  }
+}
 </style>
