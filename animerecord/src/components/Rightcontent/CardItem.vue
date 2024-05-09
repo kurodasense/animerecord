@@ -1,5 +1,5 @@
 <template>
-  <el-card class="box-card" v-loading="card_loading">
+  <el-card ref="cardItem" class="box-card" v-loading="card_loading">
     <template #header>
       <div class="card-header">
         <span v-if="isUpdateDateName" style="width: 80px">
@@ -96,6 +96,7 @@ import {
   updateNewAnimeWatchStatus,
   updateRecordDateName,
 } from "@/network/api";
+import gsap from "gsap";
 export default {
   name: "CardItem",
   inject: ["reload"],
@@ -269,10 +270,19 @@ export default {
         });
     },
   },
+  mounted() {
+    gsap.to(".box-card", {
+      y: "0",
+      duration: 0.5,
+      stagger: 0.1,
+      ease: "none",
+    });
+  },
 };
 </script>
 <style scoped lang="less">
 .box-card {
+  transform: translateY(100vh);
   .card-header {
     display: flex;
     justify-content: space-between;

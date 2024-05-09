@@ -14,9 +14,16 @@
 // @ is an alias to /src
 import NavMain from "../../components/Leftnav/NavMain.vue";
 import CardItem from "../../components/Rightcontent/CardItem.vue";
+import gsap from "gsap";
+import { onMounted } from "vue";
 export default {
   name: "Main",
   components: { NavMain, CardItem },
+  setup() {
+    onMounted(() => {
+      gsap.from(".left-nav", { x: "-100%", duration: 1 });
+    });
+  },
 };
 </script>
 

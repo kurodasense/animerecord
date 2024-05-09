@@ -5,6 +5,7 @@
       description="暂无追番记录"
       v-if="anime_date.length == 0"
     />
+
     <CardItem
       v-else
       v-for="date in sortedAnimeDates"
@@ -18,6 +19,7 @@
 // import Data from "@/data/data.json"
 import CardItem from "@/components/Rightcontent/CardItem";
 import { getAnimeDate } from "@/network/api";
+
 export default {
   name: "Home",
   components: { CardItem },

@@ -8,7 +8,12 @@
         </template>
       </NavItem>
       <!-- 归档 -->
-      <NavItem path="/main/directory" name="归档" activeColor="#2a5caa">
+      <NavItem
+        class="item"
+        path="/main/directory"
+        name="归档"
+        activeColor="#2a5caa"
+      >
         <template #item-icon>
           <Management />
         </template>

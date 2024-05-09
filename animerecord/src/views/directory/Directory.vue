@@ -7,6 +7,7 @@
     />
     <el-timeline v-else :reverse="true">
       <el-timeline-item
+        class="el-timeline-item"
         v-for="date in sortedAnimeDates"
         :key="date.date_id"
         type="primary"
@@ -28,6 +29,7 @@
 <script>
 import { getAnimeDate } from "@/network/api";
 import DirectoryItem from "@/components/Rightcontent/DirectoryItem.vue";
+import gsap from "gsap";
 export default {
   name: "Directory",
   components: { DirectoryItem },
@@ -75,13 +77,15 @@ export default {
         });
     },
   },
+  mounted() {
+    gsap.from(".directory", { y: "100%", duration: 1, ease: "none" });
+  },
 };
 </script>
 
 <style scoped lang="less">
 .directory {
   margin-top: 20px;
-
   .timestamp {
     text-align: left;
     font-size: var(--timestamp-title-font-size);

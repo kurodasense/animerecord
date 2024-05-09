@@ -1,5 +1,5 @@
 const config = require("../config");
-const { createJWT, verifyJWT } = require("../utils");
+const { verifyJWT } = require("../utils");
 const express = require("express");
 const router = express.Router();
 
