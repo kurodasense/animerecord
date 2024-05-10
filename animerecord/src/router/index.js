@@ -1,18 +1,17 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import Main from "@/views/main/Main";
-import Home from "@/views/home/Home";
-import Directory from "@/views/directory/Directory";
-
 const routes = [
   { path: "/", redirect: "/main" },
   {
     path: "/main",
-    component: Main,
+    component: () => import("@/views/main/Main"),
     redirect: "/main/home",
     children: [
-      { path: "home", component: Home }, // 主页
-      { path: "directory", component: Directory }, // 归档
+      { path: "home", component: () => import("@/views/home/Home") }, // 主页
+      {
+        path: "directory",
+        component: () => import("@/views/directory/Directory"),
+      }, // 归档
     ],
   },
 ];
