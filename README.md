@@ -39,10 +39,11 @@
 * 后端express中多添加了一个permisison_router来管理与权限相关的接口。
   * 拦截所有的post请求，如果没有携带token就报403
 
-## 4.28更新：设置http缓存和修改响应式适配的展示
+## 4.28更新：nginx设置http缓存+开启gzip和修改响应式适配的展示
 * 在nginx中设置了http缓存，改善了第二次以后的网页打开速度：
   * 对于html文件设置为协商缓存
   * 对于.css, .js这些文件，以及带hash文件设置为强缓存。
+* nginx开启gzip。
 * 之前的响应式布局展示是用flex来做的，这次修改为用grid来实现。现在首页右边的card-item的布局变得更灵活和好看。
   * 其实就使用`grid-template-columns: repeat(auto-fill, minmax(400px, 1fr))`来实现，这个功能确实可以很好地根据当前屏幕大小来自适应地分出几列。
 
