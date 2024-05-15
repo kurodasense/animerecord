@@ -17,7 +17,7 @@ module.exports = defineConfig({
     plugins: [new BundleAnalyzerPlugin()],
     optimization: {
       splitChunks: {
-        chunks: "async",
+        chunks: "all",
         minSize: 20000,
         minRemainingSize: 0,
         minChunks: 1,
@@ -28,7 +28,6 @@ module.exports = defineConfig({
           ElementPlus: {
             name: "chunk-element-plus",
             test: /[\\/]node_modules[\\/]element-plus[\\/]/,
-            chunks: "all",
             priority: 3,
             reuseExistingChunk: true,
             enforce: true,
