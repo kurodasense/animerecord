@@ -31,13 +31,13 @@ export default {
   },
   computed: {
     sortedAnimeDates() {
-      return this.anime_date.toSorted((a, b) => {
+      return this.anime_date.sort((a, b) => {
         let [a_year, a_month] = a.date_name.split(".");
         let [b_year, b_month] = b.date_name.split(".");
         if (a_year > b_year) return 1;
         else if (a_year < b_year) return -1;
         else if (a_year == b_year) {
-          return a_month < b_month;
+          return a_month - b_month;
         }
       });
     },
