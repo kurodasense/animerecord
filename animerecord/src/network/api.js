@@ -74,7 +74,6 @@ export async function deleteAnime(record_id, date_id, anime_name) {
 }
 
 export async function getPermission(secret) {
-  console.log(secret);
   return await request({
     url: "/permission/permission",
     method: "post",

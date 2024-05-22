@@ -61,7 +61,7 @@ export default {
   },
   methods: {
     handleNewAnimeDate(payload) {
-      const { date_name } = payload;
+      const { inputValue: date_name } = payload;
       addNewAnimeDate(date_name)
         .then((res) => {
           let { status, msg, data } = res.data;
