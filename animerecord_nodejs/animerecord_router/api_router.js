@@ -236,22 +236,22 @@ const storage = multer.diskStorage({
   }
 });
 const upload = multer({ dest: "./temp", storage: storage });
-const picgo = new PicGo();
+const picgo = new PicGo("../../picgo.json");
 router.post(
   "/uploadImage",
   upload.fields([{ name: "image", maxCount: 1 }, { name: "recordId" }, { name: "dateId" }]),
   async (req, res) => {
+    const fileName = req.files.image[0].filename;
+    const dateId = req.body.dateId;
+    const recordId = req.body.recordId;
+    const fullFileName = `${path.resolve("./temp")}/${fileName}`;
     try {
       // 将上传的图片保存为临时图片
-      const fileName = req.files.image[0].filename;
-      const dateId = req.body.dateId;
-      const recordId = req.body.recordId;
-      const fullFileName = `${path.resolve("./temp")}/${fileName}`;
+
       // 使用 PicGo 上传文件
       const result = await picgo.upload([fullFileName]);
       if (result?.[0].imgUrl) {
         // 删除临时图片
-        fs.unlinkSync(fullFileName);
         const imageUrl = result[0].imgUrl;
         const sql = `update anime_record set image_url='${imageUrl}' where record_id='${recordId}' and date_id='${dateId}'`;
         db.query(sql, (err, results) => {
@@ -274,6 +274,8 @@ router.post(
       }
     } catch (err) {
       res.status(500).send({ status: 500, msg: "服务器上传错误", data: err.message });
+    } finally {
+      fs.unlinkSync(fullFileName);
     }
   }
 );
