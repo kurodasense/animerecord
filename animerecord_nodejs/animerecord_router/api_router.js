@@ -15,13 +15,10 @@ Date.prototype.Format = function (fmt) {
     "m+": this.getMinutes(), //分
     "s+": this.getSeconds(), //秒
     "q+": Math.floor((this.getMonth() + 3) / 3), //季度
-    S: this.getMilliseconds(), //毫秒
+    S: this.getMilliseconds() //毫秒
   };
   if (/(y+)/.test(fmt))
-    fmt = fmt.replace(
-      RegExp.$1,
-      (this.getFullYear() + "").substr(4 - RegExp.$1.length)
-    );
+    fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
   for (var k in o)
     if (new RegExp("(" + k + ")").test(fmt))
       fmt = fmt.replace(
@@ -37,7 +34,7 @@ router.post("/*", (req, res, next) => {
     res.status(403).send({
       status: 403,
       msg: "未进行权限验证",
-      data: "未进行权限验证",
+      data: "未进行权限验证"
     });
   } else if (token && verifyJWT(token)) {
     next();
@@ -45,7 +42,7 @@ router.post("/*", (req, res, next) => {
     res.status(400).send({
       status: 400,
       msg: "权限验证失败",
-      data: "权限验证失败",
+      data: "权限验证失败"
     });
   }
 });
@@ -59,13 +56,13 @@ router.get("/getAnimeDate", (req, res) => {
       res.status(400).send({
         status: 400,
         msg: "获取所有的追番日期失败",
-        data: err.message,
+        data: err.message
       });
     } else {
       res.status(200).send({
         status: 200,
         msg: "success",
-        data: results,
+        data: results
       });
     }
   });
@@ -82,13 +79,13 @@ router.get("/getAnimeRecordByDateId", (req, res) => {
       res.status(400).send({
         status: 400,
         msg: "获取对应的追番记录失败",
-        data: err.message,
+        data: err.message
       });
     } else {
       res.status(200).send({
         status: 200,
         msg: "success",
-        data: results,
+        data: results
       });
     }
   });
@@ -108,13 +105,13 @@ router.post("/updateNewAnimeRecord", (req, res) => {
       res.status(400).send({
         status: 400,
         msg: "更新追番记录失败",
-        data: err.message,
+        data: err.message
       });
     } else {
       res.status(200).send({
         status: 200,
         msg: "success",
-        data: results,
+        data: results
       });
     }
   });
@@ -130,13 +127,13 @@ router.post("/updateNewAnimeWatchStatus", (req, res) => {
       res.status(400).send({
         status: 400,
         msg: "修改追番记录的观看状态失败",
-        data: err.message,
+        data: err.message
       });
     } else {
       res.status(200).send({
         status: 200,
         msg: "success",
-        data: results,
+        data: results
       });
     }
   });
@@ -151,13 +148,13 @@ router.post("/addNewAnimeDate", (req, res) => {
       res.status(400).send({
         status: 400,
         msg: "新增追番日期失败",
-        data: err.message,
+        data: err.message
       });
     } else {
       res.status(200).send({
         status: 200,
         msg: "success",
-        data: results,
+        data: results
       });
     }
   });
@@ -167,24 +164,21 @@ router.post("/deleteAnimeRecord", (req, res) => {
   let { date_id } = req.body;
   let sql_delete_in_anime_date = `delete from anime_date where date_id='${date_id}';`;
   let sql_delete_in_anime_record = `delete from anime_record where date_id='${date_id}';`;
-  db.query(
-    sql_delete_in_anime_date + sql_delete_in_anime_record,
-    (err, results) => {
-      if (err) {
-        res.status(400).send({
-          status: 400,
-          msg: "删除追番记录表失败",
-          data: err.message,
-        });
-      } else {
-        res.status(200).send({
-          status: 200,
-          msg: "success",
-          data: results,
-        });
-      }
+  db.query(sql_delete_in_anime_date + sql_delete_in_anime_record, (err, results) => {
+    if (err) {
+      res.status(400).send({
+        status: 400,
+        msg: "删除追番记录表失败",
+        data: err.message
+      });
+    } else {
+      res.status(200).send({
+        status: 200,
+        msg: "success",
+        data: results
+      });
     }
-  );
+  });
 });
 
 router.post("/updateRecordDateName", (req, res) => {
@@ -195,13 +189,13 @@ router.post("/updateRecordDateName", (req, res) => {
       res.status(400).send({
         status: 400,
         msg: "更新追番日期失败",
-        data: err.message,
+        data: err.message
       });
     } else {
       res.status(200).send({
         status: 200,
         msg: "success",
-        data: results,
+        data: results
       });
     }
   });
@@ -215,16 +209,74 @@ router.post("/deleteAnime", (req, res) => {
       res.status(400).send({
         status: 400,
         msg: "删除动画记录失败",
-        data: err.message,
+        data: err.message
       });
     } else {
       res.status(200).send({
         status: 200,
         msg: "success",
-        data: results,
+        data: results
       });
     }
   });
 });
+
+const multer = require("multer");
+const path = require("path");
+const { PicGo } = require("picgo");
+const fs = require("fs");
+const storage = multer.diskStorage({
+  //设置存储路径
+  destination: (req, file, cb) => {
+    cb(null, path.resolve("./temp"));
+  },
+  //设置存储的文件名
+  filename: (req, file, cb) => {
+    filename = `animerecord-${file.originalname}`;
+    cb(null, filename);
+  }
+});
+const upload = multer({ dest: "./temp", storage: storage });
+const picgo = new PicGo();
+router.post(
+  "/uploadImage",
+  upload.fields([{ name: "image", maxCount: 1 }, { name: "recordId" }, { name: "dateId" }]),
+  async (req, res) => {
+    try {
+      // 将上传的图片保存为临时图片
+      const fileName = req.files.image[0].filename;
+      const dateId = req.body.dateId;
+      const recordId = req.body.recordId;
+      const fullFileName = `${path.resolve("./temp")}/${fileName}`;
+      // 使用 PicGo 上传文件
+      const result = await picgo.upload([fullFileName]);
+      if (result?.[0].imgUrl) {
+        // 删除临时图片
+        fs.unlinkSync(fullFileName);
+        const imageUrl = result[0].imgUrl;
+        const sql = `update anime_record set image_url='${imageUrl}' where record_id='${recordId}' and date_id='${dateId}'`;
+        db.query(sql, (err, results) => {
+          if (err) {
+            res.status(500).send({
+              status: 500,
+              msg: "服务器写入图片到数据库失败",
+              data: results
+            });
+          } else {
+            res.status(200).send({
+              status: 200,
+              msg: "success",
+              data: results
+            });
+          }
+        });
+      } else {
+        res.status(500).send({ status: 500, msg: "服务器上传失败", data: result });
+      }
+    } catch (err) {
+      res.status(500).send({ status: 500, msg: "服务器上传错误", data: err.message });
+    }
+  }
+);
 
 module.exports = router;

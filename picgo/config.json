@@ -1,0 +1,14 @@
+{
+  "picBed": {
+    "github": {
+      "repo": "kurodasense/cloudimg",
+      "token": "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",
+      "path": "img/",
+      "customUrl": "",
+      "branch": "master"
+    },
+    "current": "github",
+    "uploader": "github"
+  },
+  "picgoPlugins": {}
+}
