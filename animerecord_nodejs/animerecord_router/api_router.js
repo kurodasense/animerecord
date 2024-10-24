@@ -49,7 +49,6 @@ router.post("/*", (req, res, next) => {
 
 // 获取所有的追番日期
 router.get("/getAnimeDate", (req, res) => {
-  // let sql = `select date_id, date_name from anime_date order by STR_TO_DATE(date_name, '%Y.%m') ASC`;
   let sql = `select date_id, date_name from anime_date`;
   db.query(sql, (err, results) => {
     if (err) {
@@ -71,7 +70,7 @@ router.get("/getAnimeDate", (req, res) => {
 // 根据追番日期的id来得到相应的追番记录
 router.get("/getAnimeRecordByDateId", (req, res) => {
   let date_id = req.query.date_id;
-  let sql = `select record_id, date_id, anime_name, watch_status 
+  let sql = `select record_id, date_id, anime_name, watch_status, image_url 
               from anime_record
               where date_id=${date_id}`;
   db.query(sql, (err, results) => {
