@@ -237,7 +237,10 @@ const storage = multer.diskStorage({
 });
 // 将上传的图片保存为临时图片
 const upload = multer({ dest: "./temp", storage: storage });
-const picgo = new PicGo("../../picgo.json");
+const picgo =
+  process.platform === "linux"
+    ? new PicGo("/animerecord/animerecord_nodejs/picgo/config.json")
+    : new PicGo();
 router.post(
   "/uploadImage",
   upload.fields([{ name: "image", maxCount: 1 }, { name: "recordId" }, { name: "dateId" }]),
