@@ -250,7 +250,6 @@ router.post(
       // 使用 PicGo 上传文件
       const result = await picgo.upload([fullFileName]);
       if (result?.[0].imgUrl) {
-        // 删除临时图片
         const imageUrl = result[0].imgUrl;
         const sql = `update anime_record set image_url='${imageUrl}' where record_id='${recordId}' and date_id='${dateId}'`;
         db.query(sql, (err, results) => {
