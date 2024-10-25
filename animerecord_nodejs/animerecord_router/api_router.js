@@ -235,6 +235,7 @@ const storage = multer.diskStorage({
     cb(null, filename);
   }
 });
+// 将上传的图片保存为临时图片
 const upload = multer({ dest: "./temp", storage: storage });
 const picgo = new PicGo("../../picgo.json");
 router.post(
@@ -246,8 +247,6 @@ router.post(
     const recordId = req.body.recordId;
     const fullFileName = `${path.resolve("./temp")}/${fileName}`;
     try {
-      // 将上传的图片保存为临时图片
-
       // 使用 PicGo 上传文件
       const result = await picgo.upload([fullFileName]);
       if (result?.[0].imgUrl) {
