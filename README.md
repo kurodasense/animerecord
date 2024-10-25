@@ -1,7 +1,7 @@
 # animerecord
 
 使用vscode开发。
-前端: vuecli+vue3+pinia+element plus+nginx。
+前端: vuecli+vue3+vuex+element plus+nginx。
 
 * 虽然是用vue3，但还是用的vue2的options api来写，打算以后边学边用composition api来代替options api。
 * 使用nginx来作为前端网页服务器(做前后端分离)
