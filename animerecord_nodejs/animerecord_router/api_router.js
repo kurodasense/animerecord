@@ -241,44 +241,40 @@ const picgo =
   process.platform === "linux"
     ? new PicGo("/animerecord/animerecord_nodejs/picgo/config.json")
     : new PicGo();
-router.post(
-  "/uploadImage",
-  upload.fields([{ name: "image", maxCount: 1 }, { name: "recordId" }, { name: "dateId" }]),
-  async (req, res) => {
-    const fileName = req.files.image[0].filename;
-    const dateId = req.body.dateId;
-    const recordId = req.body.recordId;
-    const fullFileName = `${path.resolve("./temp")}/${fileName}`;
-    try {
-      // 使用 PicGo 上传文件
-      const result = await picgo.upload([fullFileName]);
-      if (result?.[0].imgUrl) {
-        const imageUrl = result[0].imgUrl;
-        const sql = `update anime_record set image_url='${imageUrl}' where record_id='${recordId}' and date_id='${dateId}'`;
-        db.query(sql, (err, results) => {
-          if (err) {
-            res.status(500).send({
-              status: 500,
-              msg: "服务器写入图片到数据库失败",
-              data: results
-            });
-          } else {
-            res.status(200).send({
-              status: 200,
-              msg: "success",
-              data: results
-            });
-          }
-        });
-      } else {
-        res.status(500).send({ status: 500, msg: "服务器上传失败", data: result });
-      }
-    } catch (err) {
-      res.status(500).send({ status: 500, msg: "服务器上传错误", data: err.message });
-    } finally {
-      fs.unlinkSync(fullFileName);
+router.post("/uploadImage", upload.fields([{ name: "image", maxCount: 1 }]), async (req, res) => {
+  const fileName = req.files.image[0].filename;
+  const dateId = req.body.dateId;
+  const recordId = req.body.recordId;
+  const fullFileName = `${path.resolve("./temp")}/${fileName}`;
+  try {
+    // 使用 PicGo 上传文件
+    const result = await picgo.upload([fullFileName]);
+    if (result?.[0].imgUrl) {
+      const imageUrl = result[0].imgUrl;
+      const sql = `update anime_record set image_url='${imageUrl}' where record_id='${recordId}' and date_id='${dateId}'`;
+      db.query(sql, (err, results) => {
+        if (err) {
+          res.status(500).send({
+            status: 500,
+            msg: "服务器写入图片到数据库失败",
+            data: results
+          });
+        } else {
+          res.status(200).send({
+            status: 200,
+            msg: "success",
+            data: results
+          });
+        }
+      });
+    } else {
+      res.status(500).send({ status: 500, msg: "服务器上传失败", data: result });
     }
+  } catch (err) {
+    res.status(500).send({ status: 500, msg: "服务器上传错误", data: err.message });
+  } finally {
+    fs.unlinkSync(fullFileName);
   }
-);
+});
 
 module.exports = router;
