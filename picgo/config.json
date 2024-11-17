@@ -7,8 +7,12 @@
       "customUrl": "",
       "branch": "master"
     },
-    "current": "github",
-    "uploader": "github"
+    "smms": {
+      "token": "tncW2DUrx5F6r5CoYzEMgoIMShLWHPlW",
+      "backupDomain": "smms.app"
+    },
+    "current": "smms",
+    "uploader": "smms"
   },
   "picgoPlugins": {}
 }

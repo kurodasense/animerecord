@@ -240,7 +240,7 @@ const upload = multer({ dest: "./temp", storage: storage });
 const picgo =
   process.platform === "linux"
     ? new PicGo("/animerecord/animerecord_nodejs/picgo/config.json")
-    : new PicGo();
+    : new PicGo("D:/web_end_project/animerecord/picgo/config.json");
 router.post("/uploadImage", upload.fields([{ name: "image", maxCount: 1 }]), async (req, res) => {
   const fileName = req.files.image[0].filename;
   const dateId = req.body.dateId;
