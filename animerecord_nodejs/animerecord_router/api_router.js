@@ -1,5 +1,5 @@
 const config = require("../config");
-const { verifyJWT } = require("../utils");
+const { verifyJWT, searchImageByGoogle } = require("../utils");
 const express = require("express");
 const router = express.Router();
 
@@ -94,26 +94,36 @@ router.get("/getAnimeRecordByDateId", (req, res) => {
 // 如果追番记录存在则更新，否则插入
 router.post("/updateNewAnimeRecord", (req, res) => {
   let { record_id, date_id, anime_name, watch_status } = req.body;
-  let sql = `insert into anime_record(record_id, date_id, anime_name, watch_status)
-              values('${record_id}', '${date_id}', '${anime_name}', '${watch_status}')
-              on duplicate key update
-              anime_name='${anime_name}'`;
-  // let sql = `replace into anime_record(record_id, date_id, anime_name) values('${record_id}', '${date_id}', '${anime_name}');`;
-  db.query(sql, (err, results) => {
-    if (err) {
-      res.status(400).send({
-        status: 400,
-        msg: "更新追番记录失败",
-        data: err.message
+  searchImageByGoogle(anime_name, 1)
+    .then((image_url) => {
+      const sql = `INSERT INTO anime_record(record_id, date_id, anime_name, watch_status, image_url)
+              VALUES(?, ?, ?, ?, ?)
+              ON DUPLICATE KEY UPDATE
+              anime_name = VALUES(anime_name)`;
+      const params = [record_id, date_id, anime_name, watch_status, image_url];
+      db.query(sql, params, (err, results) => {
+        if (err) {
+          res.status(400).send({
+            status: 400,
+            msg: "更新追番记录失败",
+            data: err.message
+          });
+        } else {
+          res.status(200).send({
+            status: 200,
+            msg: "success",
+            data: results
+          });
+        }
       });
-    } else {
-      res.status(200).send({
-        status: 200,
-        msg: "success",
-        data: results
+    })
+    .catch((err) => {
+      res.status(500).send({
+        status: 500,
+        msg: "使用搜图api错误",
+        data: err
       });
-    }
-  });
+    });
 });
 
 // 修改追番记录的观看状态
